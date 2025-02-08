@@ -1,0 +1,40 @@
+#############  COURSE #############
+
+-- GEREKLILIKLER
+/*
+COMPOSER
+XAMPP
+VS CODE
+*/
+
+// yeni keyboard zorluyor :D %60 almayın :/
+
+## Extensions
+- Laravel extension Pack (GENEL olarak çok fazla şey içeriyor iyidir DOTENV...)
+- Laravel Blade Spacer ( Code formatlama için gerekli )
+- PHP Intelephense
+
+#-# extension pack ile gelen birkaç extension siliniyor :: DevDb gereksiz, EditorConfig for VS Code gereksiz
+
+## .vscode ile custom configuration eklemiş oluyoruz ( Daha fazla ayar eklenebilir )
+Burda font size ayarı vs. iyi
+
+#### COMPOSER LARAVEL PROJE OLUSTURMA --> bu composer ile projeyi indirir
+composer create-project laravel/laravel example-app
+
+## projeyi çalıştırmak (once cd ile icine gir)
+php artisan serve
+
+## LARAVEL default olarak sqlite ile gelir
+.env içinde driver'i değiştir mysql ile aynı şu şekil
+#####
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3307
+DB_DATABASE=laravel
+DB_USERNAME=grant
+DB_PASSWORD=grant345
+#####
+
+# Sonra seedi insert etmek gerek ( kokte olman gerektigini unutma )
+php artisan migrate
