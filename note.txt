@@ -38,3 +38,45 @@ DB_PASSWORD=grant345
 
 # Sonra seedi insert etmek gerek ( kokte olman gerektigini unutma )
 php artisan migrate
+
+# php artisan çokça komuta sahip bunları kullanmak işimizi baya bir kolaylaştırır
+- php artisan yapıp enterlayınca tüm komutları listelemiş oluruz
+- php about ile uygulama hakkında tüm bilgiler gelir
+- inspire ile güzel sözler çeker
+
+# sevdiğim komutlar
+- php artisan about
+- php artisan inspire
+
+# yeni bir view oluşturma
+php artisan make:view home
+
+# yeni controller oluşturma
+php artisan make:controller HomeController
+
+## Yeni model oluşturma artisan kullanarak
+php artisan make:model post
+
+## php artisan tinker 
+ne işe yarar =>
+Shell for laravel kısaca :: Burdan komutlar çalıştırılır. :: Debug yapılır application için
+-- console'dan mesela kullanıcı üretimi bile sağlayabilir . => illa direkt gidip form doldurmaya gerek yoktur.
+-- test için mesela dumy userlar gömme vs.
+
+mesela bir tablodaki kayıt sayısını almak
+App\Models\User::count()
+
+Unutma burda namespace giryorsun hangi tablo hakkında bilgi çekmek istiyorsan
+
+$$$ reminder -> factories = dummy data üretmek için bir factory yazılmış olabilir burdaki database\factories altında görürsün
+
+# tinker ile dummy user uretmek factory aracılığı ile
+App\Models\User::factory(10)->create();
+
+# 10 tane kayıt üretcek
+
+-- date değerini görmek çünkü laravelde locale değeri vardır
+date('d-M-Y')
+
+## tüm route listesini görmek
+php artisan route:list
