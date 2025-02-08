@@ -9,6 +9,7 @@
         body{
             background: black;
             font-weight: 600;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
         }
         h1,p{
             color: white;
@@ -24,7 +25,5 @@
 </head>
 <body>
     <h1>This is home page</h1>
-    <a href="{{ route('about') }}">Check out about page</a>
-    <a href="{{ route('getuser', ['id' => 2]) }}">Get User</a>
 </body>
 </html>

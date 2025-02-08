@@ -6,28 +6,38 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// static method access
-Route::get('/about', function() {
-    return 'This is a home page';
-})->name('about');
+// Route Methods
+/**
+ * 1.GET
+ * 2. POST
+ * 3. PUT
+ * 4. PATCH
+ * 5. DELETE
+ * 6. OPTIONS
+ * 7. HEAD
+ */
 
-// we could also use slug // recommended
-Route::get('/user/{id}', function($id) {
-    return 'here is the id: ' . $id;
-})->name('getuser');
+Route::get('get-route', function() {
+    return;
+});
 
-// group of routes which is working exactly same as before
-// blog. it helps you when you run php artisan route:list
-Route::group(['prefix' => 'blog', 'as' => 'blog.'] ,function() {
-    Route::get('/create', function() {
-        return "This is blog create Page";
-    })->name('create');
+Route::post('post-route', function() {
+    return;
+});
 
-    Route::get('/edit', function() {
-        return "This is blog edit Page";
-    })->name('edit');
+Route::put('put-route', function() {
+    return;
+});
 
-    Route::get('/show', function() {
-        return "This is blog show Page";
-    })->name('show');
+Route::patch('patch-route', function() {
+    return;
+});
+
+Route::delete('delete-route', function() {
+    return;
+});
+
+// fallback route -- ALWAYS have to be the bottom
+Route::fallback(function(){
+    return 'Oppppss we couldnt find the page you are looking';
 });
