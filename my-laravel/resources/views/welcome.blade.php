@@ -9,5 +9,6 @@
 </head>
 <body>
     <h1>This is home page</h1>
+    <a href="/album">Check Out Album Page</a>
 </body>
 </html>

@@ -6,6 +6,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/album', function () {
+    return view('album.index');
+})->name('album');
+
 // fallback route -- ALWAYS have to be the bottom
 Route::fallback(function(){
     return 'Oppppss we couldnt find the page you are looking';

@@ -87,4 +87,5 @@ php artisan route:list
 ## neden blade template kullanmalıyız ?
 direkt .php uzantılı olanlarda bir şey yazdırcağımız zaman sürekli php tagı aç kapat yapmamız gerekmekte ancak blade sayesinde hazır directive kullanırız @if gibi vs. ASP ile aynı mantık ordada vardı blade template
 
-
+## stack ile yield hemen hemen aynı ancak kullanımları farklı stackleri daha çok sayfa altında vs. ihtiyaç duyulan yerde kullanıyoruz ancak yield tek bir yer spesifiktir ve extend ile kullanıyoruz.
+$ stacki pushlamak gerek unutma !
