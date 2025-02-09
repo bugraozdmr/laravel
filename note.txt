@@ -51,6 +51,9 @@ php artisan migrate
 # yeni bir view oluşturma
 php artisan make:view home
 
+# klosor altında view olusturma (klosor var olmak zorunda değil)
+php artisan make:view about/index
+
 # yeni controller oluşturma
 php artisan make:controller HomeController
 
@@ -80,3 +83,8 @@ date('d-M-Y')
 
 ## tüm route listesini görmek
 php artisan route:list
+
+## neden blade template kullanmalıyız ?
+direkt .php uzantılı olanlarda bir şey yazdırcağımız zaman sürekli php tagı aç kapat yapmamız gerekmekte ancak blade sayesinde hazır directive kullanırız @if gibi vs. ASP ile aynı mantık ordada vardı blade template
+
+

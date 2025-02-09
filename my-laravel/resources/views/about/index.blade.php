@@ -8,6 +8,20 @@
     <title>My Laravel App</title>
 </head>
 <body>
-    <h1>This is home page</h1>
+    <h2>
+        @if (date('H') < 12)
+            Good morning
+        @else
+            Good afternoon
+        @endif
+         MR
+    </h2>
+    @php
+        $name='grant wick';
+    @endphp
+    <h1>This is {{ $name }} home page</h1>
+    <a href="/contact">Contact With Us !?</a>
+    {{-- This is comment line --}}
+    
 </body>
 </html>
