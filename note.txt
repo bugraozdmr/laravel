@@ -89,3 +89,75 @@ direkt .php uzantılı olanlarda bir şey yazdırcağımız zaman sürekli php t
 
 ## stack ile yield hemen hemen aynı ancak kullanımları farklı stackleri daha çok sayfa altında vs. ihtiyaç duyulan yerde kullanıyoruz ancak yield tek bir yer spesifiktir ve extend ile kullanıyoruz.
 $ stacki pushlamak gerek unutma !
+
+### Single Action Controller
+php artisan make:controller SingleActionController --invokable
+
+## Resource controller oluşturmak // CRUD işlemleri vs. oto gelir predefined methods
+php artisan make:controller BlogController -r
+
+-- sonra bunu register etmen gerek oto algılar metodları
+Route::resource('/blog', BlogController::class);
+
+## migration olusturmak artisan ile
+php artisan make:migration create_blogs_table
+-- bunu uygulamak php artisan migrate
+
+## migration komutları
+---
+migrate
+  migrate:fresh             Drop all tables and re-run all migrations
+  migrate:install           Create the migration repository
+  migrate:refresh           Reset and re-run all migrations
+  migrate:reset             Rollback all database migrations
+  migrate:rollback          Rollback the last database migration
+  migrate:status            Show the status of each migration
+---
+
+------ Laravel oluşturduğun model'e göre otomatik migration oluşturur sadece ismi düzgün versen yeter yoksa yeniden tanımlama yapman gerekir
+--> model ismi Blog ise tablo blogs olmalıdır ....
+# artisan ile model oluşturmak
+php artisan make:model Blog
+
+## Custom model olusturmak ve db ile eşlemek
+$ php artisan make:model MyModel
+- model içinde şunu ekle ( protected $table = 'blogs'; )
+
+## seeder oluturmak artisan ile ( Önerilen isimlendirme aynı bu şekil model_name+seeder )
+php artisan make:seeder UserSeeder
+
+-- Oluşturduğun seederi ana seeder olan DatabaseSeeder'a gömmen gerek
+- ekle bunu
+$this->call(UserSeeder::class);
+
+--> son olarak seedi seslemek
+php artisan db:seed
+
+## factories dummy data generator olarak sıkça kullanıyoruz.
+## factory olusturmak
+php artisan make:factory MyBlogFactory
+
+- olusturduktan sonra ana seeder'da create yapacaksın
+$ php artisan db:seed
+
+#### tinker'dan üretmek
+App\Models\MyBlog::factory(10)->create();
+
+## direkt table için migration oluşturmak
+php artisan make:migration add_new_columns_to_blogs --table=blogs
+
+-- verileri silmeden yeni sutun eklemek
+Şu şekil migration'a eklemek gerek up metodu içine
+
+Schema::table('blogs', function (Blueprint $table) {
+    // id sutununun altına eklicek demek
+    // default() ile default değerde verilebilir
+    $table->string('author')->nullable()->after('id');
+});
+
+** burdaki asıl mevzu nullable olması diye düşünüyorum bu şekilde sorunsuz bir update yapabiliyoruz.
+
+-- yeni migration'dan sonra bunları yapman gerektiğini unutma çünkü php artisan migrate:refresh tüm verileri düşürcek şekilde oluşturur db'i
+- bundan sonra son işlem olarak
+$ php artisan migrate
+- çalıştırman yetecektir
