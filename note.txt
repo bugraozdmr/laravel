@@ -161,3 +161,8 @@ Schema::table('blogs', function (Blueprint $table) {
 - bundan sonra son işlem olarak
 $ php artisan migrate
 - çalıştırman yetecektir
+
+## model olusturken migration'ınında oluşması aynı anda
+php artisan make:model Product -m
+
+--** model içinde use HasFactory; bu olmazsa factory çalışmaz

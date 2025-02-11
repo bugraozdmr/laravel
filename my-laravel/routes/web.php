@@ -35,6 +35,10 @@ Route::get('/blog', function() {
     dd($blogs);
 });
 
+Route::get('/doit',[HomeController::class, 'doit']);
+
+Route::get('/aggregate',[HomeController::class, 'aggregate']);
+
 /*
 // fallback route -- ALWAYS have to be the bottom
 Route::fallback(function(){
