@@ -39,6 +39,18 @@ Route::get('/doit',[HomeController::class, 'doit']);
 
 Route::get('/aggregate',[HomeController::class, 'aggregate']);
 
+Route::get('/eloquent', [HomeController::class, 'eloquent']);
+
+Route::get('/elupdate', [HomeController::class, 'eloquentUpdate']);
+
+Route::get('/mass', [HomeController::class, 'mass']);
+
+Route::get('/cond', [HomeController::class, 'Conditional']);
+
+Route::get('/scope', [HomeController::class, 'scope']);
+
+Route::get('/soft', [HomeController::class, 'softdelete']);
+
 /*
 // fallback route -- ALWAYS have to be the bottom
 Route::fallback(function(){

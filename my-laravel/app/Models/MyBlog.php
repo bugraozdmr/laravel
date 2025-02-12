@@ -9,4 +9,9 @@ class MyBlog extends Model
 {
     use HasFactory;
     protected $table = 'blogs';
+
+    // scope tanımlamak
+    function scopeActive($query) {
+        return $query->where('status', 1);
+    }
 }

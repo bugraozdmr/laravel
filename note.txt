@@ -166,3 +166,9 @@ $ php artisan migrate
 php artisan make:model Product -m
 
 --** model içinde use HasFactory; bu olmazsa factory çalışmaz
+
+## soft delete silme işlemi yapmadan deleted_at değeri girer (default olarak nulldır)
+$table->softDeletes();
+yeni migration'da bunu eklersin
+
+- sonrasında model class'ta => use SoftDeletes
