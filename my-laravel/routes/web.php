@@ -15,8 +15,11 @@ Route::get('/', function () {
 });
 
 // file storage
-Route::get('/file-upload', [FileUploadController::class, 'index'])->name('file.upload');
-Route::post('/file-upload', [FileUploadController::class, 'store'])->name('file.store');
+Route::get('/file-upload', action: [FileUploadController::class, 'index'])->name('file.upload');
+Route::post(uri: '/file-upload', action: [FileUploadController::class, 'store'])->name('file.store');
+Route::get(uri: '/file-download', action: [FileUploadController::class, 'download'])->name('file.download');
+
+
 
 // contact
 Route::get('contact', [ContactController::class, 'index'])->name('contact.index');

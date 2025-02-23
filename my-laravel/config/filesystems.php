@@ -40,7 +40,18 @@ return [
 
         'public' => [
             'driver' => 'local',
+            //'root' => public_path('app/public'), -- artık direkt public içinde oluştur dedik default bu değil
             'root' => storage_path('app/public'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+        'dir_public' => [
+            'driver' => 'local',
+            // buranın altında public/uploads şeklinde kayıt olcak
+            'root' => public_path('uploads'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,

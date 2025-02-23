@@ -172,3 +172,35 @@ $table->softDeletes();
 yeni migration'da bunu eklersin
 
 - sonrasında model class'ta => use SoftDeletes
+
+
+# laravel çok gelişmiş bir framework öyleki errorları direkt yakalayım vs. uğraşmıyorsun direkt parametre olarak varsa al diyorsun yapı :
+
+@if ($errors->any())
+            @foreach ($errors->all() as $error)
+                {{ $error }}
+            @endforeach
+        @endif
+
+# request oluşturmak
+php artisan make:request ContactStoreRequest
+- request içine hem kuralları hemde custom mesajları yazarız ve ilgili fonksiyon default request yerine bunu sesleriz
+
+## FILE Storage Types
+- public storage, dosyaları herkesin erişebileceği şekilde saklarken, local storage yalnızca uygulama içinden erişilebilen özel bir dizinde saklar.
+- Mesela bir satıcının ürünler için yüklediği pdf vs. onun değişebileceği şekilde olması için localde.
+
+# klosorler arası link oluşturmak ( public folder altına gider bu link )
+php artisan storage:link
+- bu storage'ın public klosorunu linkler
+-> erişmek
+http://localhost:8000/storage/MVD0Dpp6oqWWrg4Dukm3C8cNFqHBAPXMMkzEwAa1.txt
+
+# linki kaldırmak
+php artisan storage:unlink
+
+## pathlere erişmek ve değiştirmek
+config->filesystems.php
+
+burda local'de public'de vs. nereye bakacağını gösterebilirsin.
+
