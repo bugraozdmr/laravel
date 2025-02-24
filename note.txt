@@ -93,7 +93,7 @@ $ stacki pushlamak gerek unutma !
 ### Single Action Controller
 php artisan make:controller SingleActionController --invokable
 
-## Resource controller oluşturmak // CRUD işlemleri vs. oto gelir predefined methods
+## Resource controller oluşturmak // CRUD işlemleri vs. oto gelir predefined methods (( markdown ))
 php artisan make:controller BlogController -r
 
 -- sonra bunu register etmen gerek oto algılar metodları
@@ -204,3 +204,5 @@ config->filesystems.php
 
 burda local'de public'de vs. nereye bakacağını gösterebilirsin.
 
+### HARIKA extension (FAKE FILLER) oto dolduruyor inputları --- input alanına sağ tıkla input all yaparsın
+https://chromewebstore.google.com/detail/fake-filler/bnjjngeaknajbdcgpfkgnonkmififhfo?pli=1
