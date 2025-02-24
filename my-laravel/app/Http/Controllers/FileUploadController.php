@@ -40,7 +40,8 @@ class FileUploadController extends Controller
 
         // validation
         $request->validate([ // 3000kb
-            'file' => ['required','file','mimes:zip,pdf,csv','max:3000']
+            //'file' => ['required','file','mimes:zip,pdf,csv','max:3000']
+            'file' => ['required', 'image']
         ]);
 
 
@@ -55,7 +56,17 @@ class FileUploadController extends Controller
         $fileStore->file_path = '/uploads/'.$path;
         $fileStore->save();
 
-        dd('stored');
+        // dd('stored');
+        
+        // geri donsun diyoruz
+        // return redirect()->back();
+    
+        //return redirect()->route('home');
+
+        // gibi
+        //return redirect()->away('https://www.google.com');
+    
+        return redirect('/');
     }
 
     function download() {
