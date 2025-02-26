@@ -8,6 +8,8 @@ Route::get('/', function () {
     return redirect()->route('customers.index');
 })->name('home');
 
+// Bu yukarda olması daha iyi
+Route::get('customers/trash', [CustomerController::class, 'trashIndex'])->name('customers.trash');
 // resource olarak al dedik bu şekilde tüm route'ları gelcek otomatik (tanımlancak) -- php artisan route:list
 Route::resource('customers', CustomerController::class);
 

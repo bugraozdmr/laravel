@@ -5,18 +5,44 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CustomerStoreRequest;
 use App\Models\Customer;
 use Illuminate\Support\Facades\File;
+use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
+
+    // helper function // you also could've defined this one in onother file
+    public function filterCustomers(Request $request)
+    {
+        $query = $request->input('query');
+        $order = $request->input('order');
+
+        $customers = Customer::query();
+
+        if ($query) {
+            $customers->where('first_name', 'like', "%$query%")
+                ->orWhere('last_name', 'like', "%$query%")
+                ->orWhere('email', 'like', "%$query%");
+        }
+
+        if ($order == 'asc') {
+            $customers->orderBy('created_at', 'asc');
+        } else {
+            $customers->orderBy('created_at', 'desc');
+        }
+
+        return $customers->get();
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customers = Customer::all();
+        $customers = $this->filterCustomers($request);
 
         return view('customer.index', compact('customers'));
     }
+
 
 
     /**
@@ -46,6 +72,7 @@ class CustomerController extends Controller
         // isimler ayni oldugu icin boyle aldi
         $customer = Customer::create($validatedData);
 
+        // flash message - with
         return redirect()->route('customers.index')->with('success', 'Customer created successfully.');
     }
 
@@ -103,7 +130,27 @@ class CustomerController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $customer = Customer::find($id);
+
+        if (!$customer) {
+            // mesajları session yazacaktır bu şekilde
+            return redirect()->route('customers.index')->with('error', 'Customer not found.');
+        }
+
+        // artık buldum sorun yok resimi ucurdum buraya geldim aslında delete'den sonra yapmak daha bile iyi -- ama onun icin once path'i degiskende tut
+        File::delete(public_path($customer->image));
+
+        $customer->delete();
+
+        return redirect()->route('customers.index')->with('success', 'Success.');
+    }
+
+
+    function trashIndex(Request $request) {
+        $customers = $this->filterCustomers($request);
+
+
+        return view('customer.trash', compact('customers'));
     }
 
     // for api

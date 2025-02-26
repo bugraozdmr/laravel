@@ -40,8 +40,8 @@
                                 <td>{{ $customer->phone }}</td>
                             </tr>
                             <tr>
-                                <td style="width: 250px;">Account Number</td>
-                                <td>{{ $customer->account_number }}</td>
+                                <td style="width: 250px;">Bank Account Number</td>
+                                <td>{{ $customer->bank_acc_number }}</td>
                             </tr>
                             <tr>
                                 <td style="width: 250px;">About</td>
