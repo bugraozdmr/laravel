@@ -206,3 +206,10 @@ burda local'de public'de vs. nereye bakacağını gösterebilirsin.
 
 ### HARIKA extension (FAKE FILLER) oto dolduruyor inputları --- input alanına sağ tıkla input all yaparsın
 https://chromewebstore.google.com/detail/fake-filler/bnjjngeaknajbdcgpfkgnonkmififhfo?pli=1
+
+## onceki veriyi dusurmeden migration almak ve uygulamak (soft delete eklencek customer'a)
+php artisan make:migration add_soft_delete_customers_table --table=customers
+
+-- olusan yeni migration'da eklersin (up ve down metodlarının ikisinide
+)
+$table->softDeletes();

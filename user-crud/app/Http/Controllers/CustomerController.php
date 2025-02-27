@@ -11,7 +11,7 @@ class CustomerController extends Controller
 {
 
     // helper function // you also could've defined this one in onother file
-    public function filterCustomers(Request $request)
+    public function filterCustomers(Request $request, $onlyTrash = false)
     {
         $query = $request->input('query');
         $order = $request->input('order');
@@ -29,6 +29,9 @@ class CustomerController extends Controller
         } else {
             $customers->orderBy('created_at', 'desc');
         }
+
+        if($onlyTrash)
+            $customers->onlyTrashed();
 
         return $customers->get();
     }
@@ -137,8 +140,7 @@ class CustomerController extends Controller
             return redirect()->route('customers.index')->with('error', 'Customer not found.');
         }
 
-        // artık buldum sorun yok resimi ucurdum buraya geldim aslında delete'den sonra yapmak daha bile iyi -- ama onun icin once path'i degiskende tut
-        File::delete(public_path($customer->image));
+        // artık buldum sorun yok resimi ucurdum buraya geldim aslında delete'den sonra yapmak daha bile iyi -- ama onun icin once path'i degiskende tut -- force delete'e taşıdık bu basit bir algoritma problemiydi
 
         $customer->delete();
 
@@ -147,12 +149,28 @@ class CustomerController extends Controller
 
 
     function trashIndex(Request $request) {
-        $customers = $this->filterCustomers($request);
+        $customers = $this->filterCustomers($request,true);
 
 
         return view('customer.trash', compact('customers'));
     }
 
+    function restore(string $id) {
+        $customer = Customer::withTrashed()->findOrFail($id);
+        $customer->restore();
+
+        return redirect()->route('customers.index')->with('success', 'Customer Restored.');
+    }
+
+    function forceDelete(string $id) {
+        $customer = Customer::withTrashed()->findOrFail($id);
+        $customer->forceDelete();
+
+        File::delete(public_path($customer->image));
+        
+        return redirect()->route('customers.index')->with('success', 'Customer Deleted For good.');
+    }
+    
     // for api
     public function getAllCustomers()
     {

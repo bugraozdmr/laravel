@@ -10,8 +10,8 @@
                     <div class="col-md-2">
                         <a href="{{ route('customers.index') }}" class="btn" style="background-color: #4643d3; color: white;"><i class="fas fa-chevron-left"></i> Back</a>
                     </div>
-                    <div class="col-md-6">
-                        <form action="{{ route('customers.index') }}" method="GET" id="search-form">
+                    <div class="col-md-8">
+                        <form action="{{ route('customers.trash') }}" method="GET" id="search-form">
                             <div class="input-group mb-3">
                                 <input type="text" name="query" class="form-control" placeholder="Search anything..." aria-describedby="button-addon2" value="{{ request()->query('query') }}">
                                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
@@ -21,19 +21,14 @@
                     <div class="col-md-2">
                         <div class="input-group mb-3">
                             <!-- Sort Dropdown -->
-                            <form action="{{ route('customers.index') }}" method="GET" id="sort-form">
+                            <form action="{{ route('customers.trash') }}" method="GET" id="sort-form">
                                 <select class="form-select" name="order" id="sort" onchange="submitSortForm()">
                                     <option @selected(request()->query('order') == 'desc') value="desc">Newest to Old</option>
                                     <option @selected(request()->query('order') == 'asc') value="asc">Old to Newest</option>
                                 </select>
                             </form>
                         </div>
-                    </div>
-                    <div class="col-md-2 text-end">
-                        <a href="{{ route('customers.trash') }}" class="btn btn-dark"
-                            <i class="fas fa-trash-alt"> Trash</i>
-                        </a>
-                    </div>                                   
+                    </div>                                  
                 </div>
             </div>
             <div class="card-body">
@@ -61,9 +56,8 @@
                             <td>{{ $customer->bank_acc_number }}</td>
                             <td>{{ $customer->created_at->format('d-m-Y H:i') }}</td> <!-- Display created_at -->
                             <td>
-                                <a href="{{ route('customers.edit', $customer->id) }}" style="color: #2c2c2c;" class="ms-1 me-1"><i class="far fa-edit"></i></a>
-                                <a href="{{ route('customers.show', $customer->id) }}" style="color: #2c2c2c;" class="ms-1 me-1"><i class="far fa-eye"></i></a>
-                                <form id="delete-form-{{ $customer->id }}" action="{{ route('customers.destroy', $customer->id) }}" method="POST" style="display: inline-block;">
+                                <a href="{{ route('customers.restore', $customer->id) }}" style="color: #2c2c2c;" class="ms-1 me-1"><i class="fas fa-trash-restore"></i></a>
+                                <form id="delete-form-{{ $customer->id }}" action="{{ route('customers.forceDelete', $customer->id) }}" method="POST" style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" onclick="confirmDelete('{{ $customer->id }}')" style="background: none; border: none; color: #2c2c2c;" class="ms-1 me-1">
@@ -90,8 +84,8 @@
             showCancelButton: true,
             confirmButtonColor: "#d33",
             cancelButtonColor: "#3085d6",
-            confirmButtonText: "Yes, wipe it out!",
-            cancelButtonText: "No, I'm begging you"
+            confirmButtonText: "Yes, just do it!",
+            cancelButtonText: "No, I changed my mind"
         }).then((result) => {
             if (result.isConfirmed) {
                 document.getElementById("delete-form-" + customerId).submit();

@@ -87,12 +87,12 @@
     function confirmDelete(customerId) {
         Swal.fire({
             title: "Are you sure want to delete this?",
-            text: "This can't be undone!",
+            text: "This record will be placed in trash!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#d33",
             cancelButtonColor: "#3085d6",
-            confirmButtonText: "Yes, wipe it out!",
+            confirmButtonText: "Yes, send it already!",
             cancelButtonText: "No, I'm begging you"
         }).then((result) => {
             if (result.isConfirmed) {
