@@ -213,3 +213,9 @@ php artisan make:migration add_soft_delete_customers_table --table=customers
 -- olusan yeni migration'da eklersin (up ve down metodlarının ikisinide
 )
 $table->softDeletes();
+
+# DB ilişkili tasarım elequent'te illa foreign key olmak zorunda değil bu tanımda olur
+$table->unsignedBigInteger('imageable_id');
+$table->string('imageable_type'); => App/Model/Users gibi
+
+sonra bunu uygunca image içinde tanımlaman gerek

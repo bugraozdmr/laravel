@@ -15,4 +15,14 @@ class Post extends Model
     function user() {
         return $this->belongsTo(User::class);
     }
+
+    function tags() {
+        return $this->belongsToMany(Tag::class, 'post_tag');
+        // eğer isimlendirmeyi uygulamazsan manuel
+        // return $this->belongsToMany(Tag::class, 'post_tag', 'post_id', 'tag_id');
+    }
+
+    function image() {
+        return $this->morphOne(Image::class, 'imageable');
+    }
 }

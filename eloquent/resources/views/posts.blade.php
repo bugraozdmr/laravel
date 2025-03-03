@@ -11,6 +11,12 @@
         @foreach ($posts as $post)
             <h4>{{$post->name}}</h4>
             <p>Author : {{$post->user->name}}</p>
+            <p>Tags : </p>
+            <ul>
+                @foreach ($post->tags as $tag)
+                    <li>{{ $tag->name }}</li>
+                @endforeach
+            </ul>
             <hr>
         @endforeach
     </div>
