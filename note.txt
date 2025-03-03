@@ -218,4 +218,14 @@ $table->softDeletes();
 $table->unsignedBigInteger('imageable_id');
 $table->string('imageable_type'); => App/Model/Users gibi
 
-sonra bunu uygunca image içinde tanımlaman gerek
+sonra bunu uygunca image içinde tanımlaman 
+
+# artisan ile middleware olusturmak
+php artisan make:middleware CheckRole
+
+# Middleware direkt route'da ya da local controllerda ya da genelde bootstrap (global) altında tanımlanabilir.
+
+* Global
+->withMiddleware(function (Middleware $middleware) {
+    $middleware->append(CheckRole::class);
+})
