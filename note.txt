@@ -229,3 +229,25 @@ php artisan make:middleware CheckRole
 ->withMiddleware(function (Middleware $middleware) {
     $middleware->append(CheckRole::class);
 })
+
+# authentication için laravel breeze kullanılabilir.
+composer require laravel/breeze --dev
+php artisan breeze:install
+
+* ayarlar
+- blade with alpine
+- dark mode 'no'
+- PHPUnit
+
+php artisan migrate
+npm install
+npm run dev  - ya da - npm run build
+
+- son ikiye gerek yok ama değişmek istersen npm ile run edersin düzenlerken güzelce görürsün
+- şimdi http://localhost:8000/ girince sağ üstte login register görürsün artık
+#
+
+# Email verification istersen user'a (modelde)
+implements MustVerifyEmail eklenmelidir
+-- maili düzgün ayarlarsan bu mailde gönderir
+- mail ayarını .env içinde yaparsın mail sunucusunu ver yeter
