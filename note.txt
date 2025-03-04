@@ -251,3 +251,9 @@ npm run dev  - ya da - npm run build
 implements MustVerifyEmail eklenmelidir
 -- maili düzgün ayarlarsan bu mailde gönderir
 - mail ayarını .env içinde yaparsın mail sunucusunu ver yeter
+
+# Gate oluşturmak -->  aynı middleware gibi ama farklı
+app -> providers -> AppServiceProvider -> boot altına tanımla
+
+# Policy oluşturmak (--model belirterek resource policy gibi oluyor)
+php artisan make:policy PostPolicy --model=Post
