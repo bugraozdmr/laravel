@@ -257,3 +257,27 @@ app -> providers -> AppServiceProvider -> boot altına tanımla
 
 # Policy oluşturmak (--model belirterek resource policy gibi oluyor)
 php artisan make:policy PostPolicy --model=Post
+
+# mail için .env değiştirmek
+MAIL_MAILER=smtp
+MAIL_SCHEME=null
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=your@gmail.com
+MAIL_PASSWORD=your_passsword
+MAIL_FROM_ADDRESS="laravel_sucks@gmail.com"
+MAIL_FROM_NAME="${APP_NAME}"
+
+# mail classı oluşturmak
+php artisan make:mail SendMail
+
+# views/mail/demo-mail.blade.php olutştur html mail göndercez
+-- harika mailler gönderebiliyoruz dinamik // Harika bir şekilde attachment ekleyebiliyoruz.
+
+# queue ile çalışmak
+- default db'de jobları gördük ama buraya yazıyor jobi işliyor ve siliyor
+- queue workeri çalıştırmak
+$ php artisan queue:work
+
+* mail gönderirken queue kullandık bak istersen
+=> Queue worker harika !
