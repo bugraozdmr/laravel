@@ -298,3 +298,6 @@ php artisan make:component forms.button --view
 # Blade Components
 <x-alert /> => @include gibi çalışır
 - <x-alert /> component alerti sesliyor
+
+# laravel debugger paketi
+composer require barryvdh/laravel-debugbar --dev
