@@ -281,3 +281,20 @@ $ php artisan queue:work
 
 * mail gönderirken queue kullandık bak istersen
 => Queue worker harika !
+
+* larAVeL altında
+# Component oluşturmak
+php artisan make:component Alert
+- bu app/View/Components/Alert.php 'i oluşturur
+- aynı şekilde resources/views/components/alert.blade.php'i
+
+# eğer view istemiyorum sadece component olsun dersen
+php artisan make:component Forms/Link --inline
+- bu direkt component içinde blade yazmanı sağlıyor
+
+# üretilmiş component için view oluşturmak - ya da anonymous view oluşturmak
+php artisan make:component forms.button --view
+
+# Blade Components
+<x-alert /> => @include gibi çalışır
+- <x-alert /> component alerti sesliyor
