@@ -301,3 +301,10 @@ php artisan make:component forms.button --view
 
 # laravel debugger paketi
 composer require barryvdh/laravel-debugbar --dev
+
+# laravelde cache nasıl çalışır ? ( ya DB'de ya da file olarak )
+- Basitçe veritabanında cache tablosu altına yazılır cache tutulacaklar süre bittiğinde ise silinirler
+- eğer storage ayarlanırsa CACHE_STORE=file olursa localde tutacaktır (.env)
+CACHE_STORE=file
+yap
+-- bulunduğu yer => storage / framework / cache / data
