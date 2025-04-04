@@ -308,3 +308,11 @@ composer require barryvdh/laravel-debugbar --dev
 CACHE_STORE=file
 yap
 -- bulunduğu yer => storage / framework / cache / data
+
+-- ECommerce Cart Project
+* breeze kullanılacak
+composer require laravel/breeze --dev
+php artisan breeze:install
+
+
+öncelikle auth için seed oluşturduk artisan aracılığı ile sonra database seede gömdük sonra sesledik  php artisan db:seed
