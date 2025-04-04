@@ -316,3 +316,11 @@ php artisan breeze:install
 
 
 öncelikle auth için seed oluşturduk artisan aracılığı ile sonra database seede gömdük sonra sesledik  php artisan db:seed
+
+####### QUEUE
+- önce bir job tanımlamak lazım
+php artisan make:job SendWelcomeEmail
+
+- kod yazma işi bittikten sonra (mail vs.)
+php artisan queue:work
+* bu da çalışmalı aynı zamanda
