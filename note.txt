@@ -324,3 +324,30 @@ php artisan make:job SendWelcomeEmail
 - kod yazma işi bittikten sonra (mail vs.)
 php artisan queue:work
 * bu da çalışmalı aynı zamanda
+
+####### OBSERVERS
+- Laravel Observer, Eloquent modellerinin belirli olaylarını (örneğin, oluşturma, güncelleme, silme) dinleyerek, bu olaylar gerçekleştiğinde otomatik olarak belirli işlemleri tetiklemeye yarayan bir yapı sağlar. Bu sayede model ile ilgili işlemleri merkezi bir noktada yönetebilir ve kodunuzu daha düzenli tutabilirsi
+
+# observer oluşturmak
+php artisan make:observer PostObserver --model=Post
+
+* görüldüğü üzerinde observer dosyasında resource dosyası ile ilerlemek daha mantıklı olacaktır
+
+# en iyi programı izleme yolu
+dd()
+
+# Observeri register etmen gerek appservice provider boot altına
+        Post::observe(PostObserver::class);
+şeklinde
+
+###### EVENTS
+
+# event oluşturmak
+php artisan make:event PostCreateEvent
+
+###### Listener
+
+- bu sana sorular sorar onlara cevap verirsin
+php artisan make:listener
+
+- listener ile event eşlenirse otomatik oda seslenecektir
