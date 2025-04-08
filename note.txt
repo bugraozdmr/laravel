@@ -351,3 +351,153 @@ php artisan make:event PostCreateEvent
 php artisan make:listener
 
 - listener ile event eşlenirse otomatik oda seslenecektir
+
+######## BROADCASTING
+🌐 WebSocket Nedir?
+İki yönlü (client ↔ server) gerçek zamanlı bağlantıdır.
+HTTP gibi tek seferlik değil, sürekli açık bir bağlantı kurar.
+Örneğin: Bir kullanıcı mesaj gönderince anında diğer kullanıcılara düşmesi.
+
+💥 Laravel + WebSocket
+Laravel Broadcasting, WebSocket kullanarak olayları anlık iletir. Laravel’de bunu sağlamak için:
+
+🧩 1. Laravel Echo (JS tarafı)
+Frontend'de WebSocket olaylarını dinlemek için.
+
+🧩 2. Pusher veya Soketi (Backend tarafı)
+WebSocket sunucusu görevi görür.
+
+🔁 Yayın Akışı (Özet):
+Laravel’de bir event tanımlarsın → örnek: NewMessageSent
+
+CHANNEL TYPES
+Public = Herkes katılabilir
+Private = bir authentication ister
+Presence = Karşıdaki kişi aktif mi kontrolu yapar
+
+Bu event kanal üzerinden yayınlanır (broadcast).
+
+WebSocket sunucusu (Pusher/Soketi) bu yayını alır.
+
+Frontend'de Echo ile bu kanal dinlenir.
+
+Olay gerçekleştiğinde anında kullanıcıya gösterilir.
+
+Kısaca: Broadcasting = Event + Channel + WebSocket
+Bu üçlü ile Laravel uygulaman gerçek zamanlı çalışır 🚀
+
+İstersen küçük bir örnekle özet geçebilirim. Devam edelim mi?
+
+MAKALE : https://laravel.com/docs/11.x/broadcasting
+
+--> Öncelikle pusher'da oturum açmamız gerekiyor
+https://dashboard.pusher.com/accounts/sign_up
+
+- tempmail ile hesap açtım
+
+* f.em.alen.ichoals6.3.0.5@gmail.com
+* kardanadam1
+
+- yeni uygulama oluştur channels'ta
+laravel-chat
+
+- create app yap
+chat-app
+
+- frontend
+Jquery
+
+- backend
+Laravel
+
+* app-keys kısmından alırsın credentials'i
+app_id = "1970986"
+key = "a025328a9f66263a89ac"
+secret = "fba5d486c10f58535ce0"
+cluster = "eu"
+
+### PROJE TARAFI
+# broadcasting için gerekli olanlar
+php artisan install:broadcasting
+
+- no
+- yes
+- yes
+
+# pusher için gerekli
+composer require pusher/pusher-php-server
+
+# Env içine eklencekler tabi değişerek
+PUSHER_APP_ID="your-pusher-app-id"
+PUSHER_APP_KEY="your-pusher-key"
+PUSHER_APP_SECRET="your-pusher-secret"
+PUSHER_HOST=
+PUSHER_PORT=443
+PUSHER_SCHEME="https"
+PUSHER_APP_CLUSTER="mt1"
+
+-- BROADCAST_CONNECTION=pusher yap
+
+
+# npm paketi client side
+npm install --save-dev laravel-echo pusher-js
+
+# resources > js > echo.js içeriği tamamen değişcek
+import Echo from 'laravel-echo';
+
+import Pusher from 'pusher-js';
+window.Pusher = Pusher;
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: import.meta.env.VITE_PUSHER_APP_KEY,
+    cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
+    forceTLS: true
+});
+
+# .env içine şunlarıda ekle
+VITE_APP_NAME="${APP_NAME}"
+VITE_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+VITE_PUSHER_HOST="${PUSHER_HOST}"
+VITE_PUSHER_PORT="${PUSHER_PORT}"
+VITE_PUSHER_SCHEME="${PUSHER_SCHEME}"
+VITE_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+
+# npm run build yap
+-- paketleri sudo ile yükledim ondan bunuda sudo ile çalıştırman gerekli
+
+-- kullanıcağın input dosyaları vite.config.js içinde olamlıdır
+            input: ['resources/css/app.css', 'resources/js/app.js','resources/js/echo.js'],
+
+-- buraya ekleme yaptıktan sonra seslemeyi unutma
+npm run build
+
+# google'da vs. tarayıcılarda görmek WEB SOCKET'i
+network -> settings -> WS
+
+# burda izleyebilirsin console'dan PUSHER'dan
+https://dashboard.pusher.com/apps/1970986/console
+
+# test event
+php artisan make:event NewMessage
+
+-- burda aslında messajı queue'a alıyor bunun için öncesinde default olarak o var zaten queue'a alıyor onuda db'e yazıyor
+php artisan queue:work
+- ama bunu kullanma
+
+# onun yerine .env içinde
+QUEUE_CONNECTION=sync
+
+# öncelikle projeye breeze ekle
+onu unutma
+
+# direkt sürekli vite configi değişmek yerine şunu app.js'e ekleyebiliriz
+import './echo.js';
+- ama o zaman sayfada bunu seslemen gerek
+    @vite('resources/js/app.js')
+
+###
+npm run dev ile sürekli build almana gerek kalmaz o zaten değişikleri oto algılıyor
+
+- mantık bu broadcasting'te
+private chatler var ve birden fazla channel var herkesin kendine özgü olcak şekilde. Bradcaster 1 tane bu channellar oraya bağlı oluyorlar.
