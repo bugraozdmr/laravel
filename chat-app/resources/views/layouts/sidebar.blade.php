@@ -1,8 +1,8 @@
 <div id="sidepanel">
     <div id="profile">
         <div class="wrap">
-            <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
-            <p>Mike Ross</p>
+            <img id="profile-img" src="{{ asset('default-images/default.jpg') }}" class="online" alt="" />
+            <p>{{ auth()->user()->name }}</p>
             <i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
             <div id="status-options">
                 <ul>
@@ -26,28 +26,28 @@
        <hr> 
     <div id="contacts">
         <ul>
-            <li class="contact">
-                <div class="wrap">
-                    <span class="contact-status online"></span>
-                    <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
-                    <div class="meta">
-                        <p class="name">Louis Litt</p>
-                        <p class="preview">You just got LITT up, Mike.</p>
+            @forelse($users as $user)
+                <li class="contact" data-id="{{ $user->id }}">
+                    <div class="wrap">
+                        <span class="contact-status {{ $user->is_online ? 'online' : 'offline' }}"></span>
+                        <img src="{{ asset('default-images/default.jpg') }}" alt="{{ $user->name }}" />
+                        <div class="meta">
+                            <p class="name">{{ $user->name }}</p>
+                            <p class="preview">{{ $user->email }}</p>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li class="contact active">
-                <div class="wrap">
-                    <span class="contact-status busy"></span>
-                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                    <div class="meta">
-                        <p class="name">Harvey Specter</p>
-                        <p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call
-                            their bluff. Or, you do any one of a hundred and forty six other things.</p>
-                    </div>
-                </div>
-            </li>
-        </ul>
+                </li>
+            @empty
+                <li style="text-align: center" class="no-user-found">No user found</li>
+            @endforelse
+        </ul>             
     </div>
-  
+    <div style="text-align: center; margin-top: 12px">
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" style="padding: 10px 20px; background-color: #ff4d4d; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
+                Logout
+            </button>
+        </form>
+    </div>
 </div>
