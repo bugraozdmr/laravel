@@ -1,7 +1,7 @@
 const selectedContact = $("meta[name='selected_contact']");
 const baseUrl = $("meta[name='base_url']").attr('content');
+const authId = $("meta[name='auth_id']").attr('content');
 const inbox = $('.messages ul');
-
 
 function fetchMessages() {
     let contactId = selectedContact.attr('content');
@@ -86,3 +86,8 @@ $(document).ready(function () {
         sendMessage();
     });
 });
+
+window.Echo.private('message.' + authId).
+    listen('SendMessageEvent', (e) => {
+        console.log(e);
+    });

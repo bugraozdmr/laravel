@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SendMessageEvent;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -54,6 +55,8 @@ class ChatController extends Controller
         $message->to_id = $validated['contact_id'];
         $message->message = $validated['message'];
         $message->save();
+
+        event(new SendMessageEvent($message->message, $validated['contact_id']));
     
         return response()->json([
             'success' => true,
