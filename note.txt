@@ -507,3 +507,47 @@ private chatler var ve birden fazla channel var herkesin kendine özgü olcak ş
 - beraber çalışmalılar
 php artisan serve
 npm run dev
+
+
+-> service provider
+Providers -> AppServiceProvider
+
+-> yeni provider oluşturmak
+php artisan make:provider TestServiceProvider
+
+- register etmek lazım
+bootstrat -> providers.php
+
+- register ettikten sonra ilgili servici şu şekil kullanmak serbest oluyor
+Route::get('get', function() {
+    echo app()->make('test_service');
+});
+
+-> classlar aracılığı ile facade tanımlamak
+provider + service + facade  === bu yapıyı kullandık
+
+-> trait oluşturmak
+php artisan make:trait Traits/ImageUpload 
+
+-> helper functions
+* uygulamanın her yerinden erişebiliriz
+
+*** Autoload'a eklemen gerek composer.json içinde
+,
+        "files": [
+            "app/Helpers/helper.php"
+        ]
+
+sonra çalıştır
+composer du
+
+- global function seslemek
+makeSlug("Buğra Wick");
+
+-> route model bindings
+php artisan make:model Product -m
+
+-> burda direkt string $id yerine Product $product istiyoruz
+php artisan make:controller TestProductController --resource --model=Product
+
+- direkt istediğimiz şekilde gelir
