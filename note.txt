@@ -551,3 +551,24 @@ php artisan make:model Product -m
 php artisan make:controller TestProductController --resource --model=Product
 
 - direkt istediğimiz şekilde gelir
+
+##### LOCALIZATION
+
+# bunu yapınca lang -> en üretir ve altındakiler
+php artisan lang:publish
+
+# yeni bir dil ekle anahtarlar aynı olmalı ama !
+sonra config altında app.php içinde
+
+    'locale' => env('APP_LOCALE', 'en'),
+değiş burayı
+
+değilmiş !!!!
+.env'de 
+APP_LOCALE=tr
+yaptım
+
+bulamazsa en çağırır
+APP_LOCALE=tr
+APP_FALLBACK_LOCALE=en
+APP_FAKER_LOCALE=en_US
