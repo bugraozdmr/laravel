@@ -572,3 +572,27 @@ bulamazsa en çağırır
 APP_LOCALE=tr
 APP_FALLBACK_LOCALE=en
 APP_FAKER_LOCALE=en_US
+
+## artisan console
+
+-> Localization klosoru altında yaptım örnekleri
+
+- db kontrolu
+php artisan db:monitor
+
+- komut oluşturmak
+php artisan make:command CreateUserCommand
+bu oluşturur
+Console command [app/Console/Commands/CreateUser.php] created successfully.  
+
+- parametre alcak şekilde yazdığımdan - isteğe bağlı yaptım -- ayrıca option
+php artisan app:create-user Grant
+php artisan app:create-user --message="xd"
+
+-- 
+php artisan app:create-user      
+
+ What is your name?:
+ > Grant
+
+hello Grant
