@@ -596,3 +596,26 @@ php artisan app:create-user
  > Grant
 
 hello Grant
+
+#### API
+# dummy data oluşturmak
+php artisan db:seed
+
+- hasfactory gerekti ayrıca factory yazdık onu kullandık DatabaseSeeder'da
+
+# api yüklemek
+php artisan install:api
+-> yes
+soruya
+
+- form data göndermek
+resim storage -> app -> public -> uploads 'a gidiyor bakabilirsin
+postman form-data seç ve resim için file gerisi için text ayarla gönder ...
+accept : application/json
+da ekle
+
+* api rest controller
+php artisan make:controller Api/v1/TestController --resource --api
+
+* kaydetmek api.php'e
+Route::apiResource('/tests', TestController::class);
